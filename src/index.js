@@ -1,37 +1,31 @@
-import { configureStore } from '@reduxjs/toolkit'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { configureStore, bindActionCreators } from '@reduxjs/toolkit'
+import reducer from './reducer';
+import * as actions from './actions';
+import Counter from './counter';
 
-const reducer = (state=0, action) => {
-    switch(action.type) {
-        case 'INC': 
-            return state + 1;
-        case 'DEC': 
-            return state - 1;
-        case 'RESET': 
-            return 0;
-        default:
-            return state
-    }
-}
+
 
 const store = configureStore({reducer})
+const {dispatch} = store;
+const {inc, dec, reset} = bindActionCreators(actions, dispatch);
 
-const inc = document.getElementById('plus');
-inc.addEventListener('click', () => {
-    store.dispatch({type: 'INC'})
-});
-
-const dec = document.getElementById('minus');
-dec.addEventListener('click', () => {
-    store.dispatch({type: 'DEC'})
-});
-
-const reset = document.getElementById('reset');
-reset.addEventListener('click', () => {
-    store.dispatch({type: 'RESET'})
-});
+const root = createRoot(document.getElementById('root'));
 
 const update = () => {
-    document.getElementById('counter').textContent = store.getState();
+    root.render(
+        <Counter 
+            counter={store.getState()}
+            inc={inc}
+            dec={dec}
+            reset={reset}
+            />
+    )
 }
 
+update();
 store.subscribe(update);
+
+
+

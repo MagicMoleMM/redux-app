@@ -1,5 +1,5 @@
 .background {
-    position: relative;
+    /* position: relative; */
     width: 1440px;
     height: 768px;
     background: linear-gradient(180deg, #0837B0 0%, #021E66 100%);
@@ -51,4 +51,9 @@
     height: 65px;
     background: #CF1C1C;;
     border-radius: 4px;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle; 
 }
