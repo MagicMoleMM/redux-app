@@ -1,31 +1,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { configureStore, bindActionCreators } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import { Provider } from 'react-redux';
 import reducer from './reducer';
-import * as actions from './actions';
-import Counter from './counter';
-
-
+import App from './components/app';
 
 const store = configureStore({reducer})
-const {dispatch} = store;
-const {inc, dec, reset} = bindActionCreators(actions, dispatch);
 
 const root = createRoot(document.getElementById('root'));
+root.render(<Provider store={store}><App/></Provider>);
 
-const update = () => {
-    root.render(
-        <Counter 
-            counter={store.getState()}
-            inc={inc}
-            dec={dec}
-            reset={reset}
-            />
-    )
-}
-
-update();
-store.subscribe(update);
 
 
 

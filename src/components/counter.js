@@ -1,9 +1,10 @@
 import React from 'react';
-import plus from './Plus.png';
-import minus from './Minus.jpg';
-import res from './Reset.png';
-import './index.css';
-
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+import plus from '../Plus.png';
+import minus from '../Minus.jpg';
+import res from '../Reset.png';
+import '../index.css';
 
 
 const Counter = ({counter, inc, dec, reset}) => {
@@ -25,4 +26,10 @@ const Counter = ({counter, inc, dec, reset}) => {
     )
 }
 
-export default Counter;
+const mapStateToProps = (state) => {
+    return {
+        counter: state
+    }
+}
+
+export default connect(mapStateToProps, actions)(Counter);
